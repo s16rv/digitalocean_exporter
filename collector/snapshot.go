@@ -66,6 +66,10 @@ func (c *SnapshotCollector) Collect(ch chan<- prometheus.Metric) {
 	}
 
 	for _, snapshot := range snapshots {
+		if len(snapshot.Regions) == 0 {
+			return
+		}
+
 		labels := []string{
 			snapshot.ID,
 			snapshot.Name,
